@@ -16,6 +16,7 @@
  */
 package org.jkiss.dbeaver.tools.compare.simple.ui;
 
+import java.nio.file.Files;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -148,7 +149,7 @@ public class CompareObjectsWizard extends Wizard implements IExportWizard {
             File reportFile;
             switch (settings.getOutputType()) {
                 case BROWSER:
-                    reportFile = File.createTempFile("compare-report", ".html");
+                    reportFile = Files.createTempFile("compare-report", ".html").toFile();
                     break;
                 default:
                 {

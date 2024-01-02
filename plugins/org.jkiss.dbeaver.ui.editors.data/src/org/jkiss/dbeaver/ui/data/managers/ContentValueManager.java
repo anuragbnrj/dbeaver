@@ -185,7 +185,7 @@ public class ContentValueManager extends BaseValueManager {
     }
 
     private static void openOctetStream(byte[] data) throws IOException {
-        File tmpFile = File.createTempFile("dbtmp", ".octet-stream");
+        File tmpFile = Files.createTempFile("dbtmp", ".octet-stream").toFile();
         FileOutputStream fos = new FileOutputStream(tmpFile);
         if (data == null) {
             DBWorkbench.getPlatformUI().showError("Open Content", "Raw value was null");

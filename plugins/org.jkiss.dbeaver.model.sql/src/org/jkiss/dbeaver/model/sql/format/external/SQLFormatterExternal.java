@@ -17,6 +17,7 @@
 
 package org.jkiss.dbeaver.model.sql.format.external;
 
+import java.nio.file.Files;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.jkiss.dbeaver.Log;
@@ -100,7 +101,7 @@ public class SQLFormatterExternal implements SQLFormatter {
                     throw new IOException("No command specified for external formatter");
                 }
                 if (useFile) {
-                    tmpFile = File.createTempFile("dbeaver-sql-format", "sql");
+                    tmpFile = Files.createTempFile("dbeaver-sql-format", "sql").toFile();
                     try (final OutputStream os = new FileOutputStream(tmpFile)) {
                         try (final Writer out = new OutputStreamWriter(os, sourceEncoding)) {
                             IOUtils.copyText(new StringReader(source), out);
