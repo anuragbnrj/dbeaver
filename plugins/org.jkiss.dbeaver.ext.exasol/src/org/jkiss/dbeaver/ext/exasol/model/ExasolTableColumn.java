@@ -212,7 +212,9 @@ public class ExasolTableColumn extends JDBCTableColumn<ExasolTableBase>
 
     public void setRequired(boolean required) {
     	if (changed && oriRequired == null)
-    		oriRequired = super.isRequired();
+    		{
+    		    oriRequired = super.isRequired();
+    		}
         super.setRequired(required);
     }
 

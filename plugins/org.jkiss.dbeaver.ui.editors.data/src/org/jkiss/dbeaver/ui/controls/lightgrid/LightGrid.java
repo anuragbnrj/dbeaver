@@ -4010,7 +4010,9 @@ public abstract class LightGrid extends Canvas {
             //}
 
             if (!shiftPressed)
-                focusColumn = newColumnFocus;
+                {
+                    focusColumn = newColumnFocus;
+                }
                 showColumn(newColumnFocus);
 
             if (!shiftPressed) {

@@ -116,7 +116,9 @@ public class ExasolTableColumnManager extends SQLTableColumnManager<ExasolTableC
         	// build nullability string
         	String nullability = "";
         	if (exasolColumn.isOriRequired() != null &&  exasolColumn.isOriRequired() != exasolColumn.isRequired())
-        		nullability = exasolColumn.isRequired() ? "NOT NULL" : "NULL";
+        		{
+        		    nullability = exasolColumn.isRequired() ? "NOT NULL" : "NULL";
+        		}
         		
         	
             final String deltaSQL = DBUtils.getQuotedIdentifier(exasolColumn) + " " + exasolColumn.getFormatType()
