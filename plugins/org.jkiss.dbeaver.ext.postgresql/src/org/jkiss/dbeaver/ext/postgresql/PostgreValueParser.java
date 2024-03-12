@@ -371,7 +371,7 @@ public class PostgreValueParser {
 
                     // add element to current array
                     if (b != null && (!b.isEmpty() || wasInsideString)) {
-                        curArray.add(!wasInsideString && b.equals("NULL") ? null : b);
+                        curArray.add(!wasInsideString && "NULL".equals(b) ? null : b);
                     }
 
                     wasInsideString = false;
@@ -435,7 +435,7 @@ public class PostgreValueParser {
     ) {
         final int length = value.length();
 
-        if (value.equals("{}")) {
+        if ("{}".equals(value)) {
             // Fast path for empty arrays
             return generator.apply(0);
         }

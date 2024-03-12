@@ -238,10 +238,10 @@ public class DataFormatterRegistry implements DBPDataFormatterRegistry
         public void saxStartElement(SAXReader reader, String namespaceURI, String localName, Attributes atts)
             throws XMLException
         {
-            if (localName.equals("profile")) {
+            if ("profile".equals(localName)) {
                 curStore = new CustomProfileStore();
                 profileName = atts.getValue("name");
-            } else if (localName.equals("property")) {
+            } else if ("property".equals(localName)) {
                 if (curStore != null) {
                     curStore.setValue(
                         atts.getValue("name"),
@@ -254,7 +254,7 @@ public class DataFormatterRegistry implements DBPDataFormatterRegistry
         public void saxEndElement(SAXReader reader, String namespaceURI, String localName)
             throws XMLException
         {
-            if (localName.equals("profile")) {
+            if ("profile".equals(localName)) {
                 if (!CommonUtils.isEmpty(profileName)) {
                     DataFormatterProfile profile = new DataFormatterProfile(profileName, curStore);
                     customProfiles.add(profile);

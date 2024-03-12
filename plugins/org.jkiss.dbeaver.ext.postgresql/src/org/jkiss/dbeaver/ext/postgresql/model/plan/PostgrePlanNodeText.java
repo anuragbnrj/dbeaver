@@ -142,7 +142,7 @@ public class PostgrePlanNodeText extends PostgrePlanNodeBase<PostgrePlanNodeText
         boolean isObjectName = false;
         
         for(int index = 1; index < tokens.length;index++) {
-            if (tokens[index].equals(SEPARATOR)) {
+            if (SEPARATOR.equals(tokens[index])) {
                 continue;
             }
             if (tokens[index].startsWith("(")) {
@@ -152,7 +152,7 @@ public class PostgrePlanNodeText extends PostgrePlanNodeBase<PostgrePlanNodeText
                 isObjectName = false;
                 continue;
             }
-            if (tokens[index].equalsIgnoreCase("on")) {
+            if ("on".equalsIgnoreCase(tokens[index])) {
                 isObjectName = true;
                 continue;
             }

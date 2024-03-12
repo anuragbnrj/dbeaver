@@ -539,10 +539,10 @@ public class PostgreRole implements
                                 privileges = PostgreUtils.extractPermissionsFromACL(monitor, schema, acl);
                             } else if (objectType != null && objectName != null) {
                                 pKind = PostgrePrivilegeGrant.Kind.TABLE;
-                                if (objectType.equals("C")) {
+                                if ("C".equals(objectType)) {
                                     privileges = PostgreUtils.extractPermissionsFromACL(monitor, schema, acl);
                                     pKind = PostgrePrivilegeGrant.Kind.SCHEMA;
-                                } else if (objectType.equals("S")) {
+                                } else if ("S".equals(objectType)) {
                                     PostgreSequence sequence = schema.getSequence(monitor, objectName);
                                     privileges = PostgreUtils.extractPermissionsFromACL(monitor, sequence, acl);
                                     pKind = PostgrePrivilegeGrant.Kind.SEQUENCE;

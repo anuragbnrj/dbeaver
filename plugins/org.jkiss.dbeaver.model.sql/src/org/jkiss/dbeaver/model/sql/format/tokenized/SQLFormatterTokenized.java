@@ -124,14 +124,14 @@ public class SQLFormatterTokenized implements SQLFormatter {
             String curString = token.getString();
             if (prev.getType() != TokenType.SPACE &&
                     token.getType() != TokenType.SPACE &&
-                    !prevString.equals("(") &&
+                    !"(".equals(prevString) &&
                     !curString.startsWith("(") &&
-                    !prevString.equals(")") &&
-                    !curString.equals(")")) {
-                if (curString.equals(",") || statementDelimiters.contains(curString)) { //$NON-NLS-1$
+                    !")".equals(prevString) &&
+                    !")".equals(curString)) {
+                if (",".equals(curString) || statementDelimiters.contains(curString)) { //$NON-NLS-1$
                     continue;
                 }
-                if (formatterCfg.isFunction(prevString) && curString.equals("(")) { //$NON-NLS-1$
+                if (formatterCfg.isFunction(prevString) && "(".equals(curString)) { //$NON-NLS-1$
                     continue;
                 }
                 if (token.getType() == TokenType.VALUE && prev.getType() == TokenType.NAME) {
@@ -272,8 +272,8 @@ public class SQLFormatterTokenized implements SQLFormatter {
             String token2String = t2.getString().toUpperCase(Locale.ENGLISH);
             // Concatenate tokens
             if (t0.getType() == TokenType.KEYWORD && t1.getType() == TokenType.SPACE && t2.getType() == TokenType.KEYWORD) {
-                if (((tokenString.equals("ORDER") || tokenString.equals("GROUP") || tokenString.equals("CONNECT")) && token2String.equals("BY")) ||
-                        ((tokenString.equals("START")) && token2String.equals("WITH")))
+                if ((("ORDER".equals(tokenString) || "GROUP".equals(tokenString) || "CONNECT".equals(tokenString)) && "BY".equals(token2String)) ||
+                        ((tokenString.equals("START")) && "WITH".equals(token2String)))
                 {
                     t0.setString(t0.getString() + " " + t2.getString());
                     argList.remove(index + 1);
@@ -282,7 +282,7 @@ public class SQLFormatterTokenized implements SQLFormatter {
             }
 
             // Oracle style joins
-            if (tokenString.equals("(") && t1.getString().equals("+") && token2String.equals(")")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            if ("(".equals(tokenString) && t1.getString().equals("+") && ")".equals(token2String)) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 t0.setString("(+)"); //$NON-NLS-1$
                 argList.remove(index + 1);
                 argList.remove(index + 1);

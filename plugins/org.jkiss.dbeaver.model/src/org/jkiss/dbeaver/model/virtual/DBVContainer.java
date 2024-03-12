@@ -59,7 +59,7 @@ public class DBVContainer extends DBVObject implements DBSObjectContainer {
                 entities.put(entity.getName(), entity);
             } else if (id.startsWith(CONFIG_PREFIX)) {
                 String configMap = id.substring(CONFIG_PREFIX.length());
-                if (configMap.equals("properties")) {
+                if ("properties".equals(configMap)) {
                     loadPropertiesFrom(map, id);
                 }
             } else if (element.getValue() instanceof Map) {

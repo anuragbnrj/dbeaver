@@ -54,7 +54,7 @@ public class TiDBMySQLDataSourceInfo extends JDBCDataSourceInfo {
         // But the real TiDB version is v6.1.0
         String tidbVersion = this.getDatabaseProductVersion();
         String[] tidbVersionArray = tidbVersion.split("-");
-        if (tidbVersionArray.length < 3 || !tidbVersionArray[1].equals("TiDB")) {
+        if (tidbVersionArray.length < 3 || !"TiDB".equals(tidbVersionArray[1])) {
             // It means not a TiDB server actually
             return new Version(0, 0, 0);
         }

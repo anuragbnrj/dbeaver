@@ -125,7 +125,7 @@ public class SQLQueryParameterRegistry {
         @Override
         public void saxStartElement(SAXReader reader, String namespaceURI, String localName, Attributes atts)
             throws XMLException {
-            if (localName.equals(TAG_PARAMETER)) {
+            if (TAG_PARAMETER.equals(localName)) {
                 curParameterName = atts.getValue("name");
                 curParameterValue = atts.getValue("value");
             }
@@ -142,7 +142,7 @@ public class SQLQueryParameterRegistry {
         @Override
         public void saxEndElement(SAXReader reader, String namespaceURI, String localName)
             throws XMLException {
-            if (localName.equals(TAG_PARAMETER) && curParameterName != null) {
+            if (TAG_PARAMETER.equals(localName) && curParameterName != null) {
                 if (curParameterValue == null) {
                     String legacyValue = legacyParameterValue.toString().trim();
                     if (!legacyValue.isEmpty()) {

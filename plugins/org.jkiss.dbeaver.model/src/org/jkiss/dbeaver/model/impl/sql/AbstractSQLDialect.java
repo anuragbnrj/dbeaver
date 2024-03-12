@@ -514,7 +514,7 @@ public abstract class AbstractSQLDialect implements SQLDialect {
         for (String[] pair : quoteStrings) {
             final String q1 = pair[0];
             final String q2 = pair[1];
-            if (q1.equals(q2) && (q1.equals("\"") || q1.equals("'")) && str.contains(q1)) {
+            if (q1.equals(q2) && ("\"".equals(q1) || "'".equals(q1)) && str.contains(q1)) {
                 str = str.replace(q1, q1 + q1);
             }
         }
@@ -812,7 +812,7 @@ public abstract class AbstractSQLDialect implements SQLDialect {
                 return "(" + maxLength + ')';
             }
         } else if (dataKind == DBPDataKind.NUMERIC) {
-            if (typeName.equals("DECIMAL") || typeName.equals("NUMERIC") || typeName.equals("NUMBER")) {
+            if ("DECIMAL".equals(typeName) || "NUMERIC".equals(typeName) || "NUMBER".equals(typeName)) {
                 Integer scale = column.getScale();
                 int precision = CommonUtils.toInt(column.getPrecision());
                 if (precision == 0) {
@@ -831,7 +831,7 @@ public abstract class AbstractSQLDialect implements SQLDialect {
                         return "(" + precision + ',' + scale + ')';
                     }
                 }
-            } else if (typeName.equals("BIT")) {
+            } else if ("BIT".equals(typeName)) {
                 // Bit string?
                 int precision = CommonUtils.toInt(column.getPrecision());
                 if (precision > 1) {

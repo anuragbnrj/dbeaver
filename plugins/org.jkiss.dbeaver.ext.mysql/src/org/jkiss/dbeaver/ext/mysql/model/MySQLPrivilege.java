@@ -135,7 +135,7 @@ public class MySQLPrivilege implements DBAPrivilege
 
     public boolean isGrantOption()
     {
-        return name.equalsIgnoreCase(GRANT_PRIVILEGE);
+        return GRANT_PRIVILEGE.equalsIgnoreCase(name);
     }
 
     @Override

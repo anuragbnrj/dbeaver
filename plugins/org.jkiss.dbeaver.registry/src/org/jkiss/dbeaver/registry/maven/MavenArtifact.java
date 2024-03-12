@@ -146,7 +146,7 @@ public class MavenArtifact implements IMavenIdentifier
             if (divPos != -1) {
                 href = href.substring(divPos + 1);
             }
-            if (href.equals("..")) {
+            if ("..".equals(href)) {
                 continue;
             }
             versions.add(href);

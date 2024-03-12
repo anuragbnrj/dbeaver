@@ -815,7 +815,7 @@ public class PostgreDataType extends JDBCDataType<PostgreSchema>
     }
 
     private boolean isValidFuncRef(String func) {
-        return !CommonUtils.isEmpty(func) && !func.equals("-"); //$NON-NLS-1$
+        return !CommonUtils.isEmpty(func) && !"-".equals(func); //$NON-NLS-1$
     }
 
     private void appendCreateTypeParameter(@NotNull StringBuilder sql, @NotNull String name, @Nullable Object value) {

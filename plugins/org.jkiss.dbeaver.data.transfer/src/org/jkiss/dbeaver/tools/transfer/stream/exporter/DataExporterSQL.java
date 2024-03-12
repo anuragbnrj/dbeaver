@@ -158,16 +158,16 @@ public class DataExporterSQL extends StreamExporterAbstract implements IAppendab
         }
 
         String keywordCase = CommonUtils.toString(properties.get(PROP_KEYWORD_CASE));
-        if (keywordCase.equals("lower")) {
+        if ("lower".equals(keywordCase)) {
             identifierCase = DBPIdentifierCase.LOWER;
         } else {
             identifierCase = DBPIdentifierCase.UPPER;
         }
 
         String identifierCaseProp = CommonUtils.toString(properties.get(PROP_IDENTIFIER_CASE));
-        if (identifierCaseProp.equals("as is")) {
+        if ("as is".equals(identifierCaseProp)) {
             columnsAndTableNamesCase = DBPIdentifierCase.MIXED;
-        } else if (identifierCaseProp.equals("lower")) {
+        } else if ("lower".equals(identifierCaseProp)) {
             columnsAndTableNamesCase = DBPIdentifierCase.LOWER;
         } else {
             columnsAndTableNamesCase = DBPIdentifierCase.UPPER;

@@ -157,7 +157,7 @@ public class QMRegistryImpl implements QMRegistry {
                     }
 
                     return null;
-                } else if (method.getName().equals("getHandlerName")) {
+                } else if ("getHandlerName".equals(method.getName())) {
                     return "Default";
                 } else {
                     return method.invoke(this, args);

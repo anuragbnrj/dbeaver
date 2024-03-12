@@ -140,7 +140,7 @@ public class BrowserImageViewer extends AbstractImageViewer {
                         success = true;
                     }
                 } catch (IOException exception) {
-                    if (!exception.getMessage().equals("closed")) {
+                    if (!"closed".equals(exception.getMessage())) {
                         log.error("Error reading image data", exception);
                         showBinaryTXT(inputStream);
                     }

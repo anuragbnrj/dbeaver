@@ -239,7 +239,7 @@ public class ClickhouseSQLDialect extends GenericSQLDialect {
 
     @Override
     public String getColumnTypeModifiers(@NotNull DBPDataSource dataSource, @NotNull DBSTypedObject column, @NotNull String typeName, @NotNull DBPDataKind dataKind) {
-        if (typeName.equals("String")) {
+        if ("String".equals(typeName)) {
             return null;
         }
         return super.getColumnTypeModifiers(dataSource, column, typeName, dataKind);

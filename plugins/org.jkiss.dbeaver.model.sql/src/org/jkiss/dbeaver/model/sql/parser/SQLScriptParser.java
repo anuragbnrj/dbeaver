@@ -794,7 +794,7 @@ public class SQLScriptParser {
 
                         String preparedParamName = null;
                         String paramMark = paramName.substring(0, 1);
-                        if (paramMark.equals("$")) {
+                        if ("$".equals(paramMark)) {
                             String variableName = SQLQueryParameter.stripVariablePattern(paramName);
                             if (!variableName.equals(paramName)) {
                                 preparedParamName = variableName.toUpperCase(Locale.ENGLISH);

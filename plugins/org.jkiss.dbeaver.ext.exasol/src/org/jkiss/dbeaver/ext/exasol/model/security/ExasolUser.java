@@ -84,7 +84,7 @@ public class ExasolUser extends ExasolGrantee
 				this.type = ExasolUserType.KERBEROS;
 			}
 			
-			if (this.passwordState != null && this.passwordState.equals("EXPIRED"))
+			if (this.passwordState != null && "EXPIRED".equals(this.passwordState))
 			{
 				this.locked = true;
 			} else {

@@ -186,7 +186,7 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
                     if (!request.isSimpleMode() &&
                         CommonUtils.isEmpty(request.getWordPart()) &&
                         prevDelimiter.indexOf(curChar) != -1 &&
-                        prevDelimiter.equals(SQLCompletionAnalyzer.ALL_COLUMNS_PATTERN) &&
+                        SQLCompletionAnalyzer.ALL_COLUMNS_PATTERN.equals(prevDelimiter) &&
                         !CommonUtils.isEmpty(wordDetector.getNextWord()))
                     {
                         wordDetector.shiftOffset(-SQLCompletionAnalyzer.ALL_COLUMNS_PATTERN.length());
@@ -316,7 +316,7 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
                     String tableAlias = null;
                     if (ALL_COLUMNS_PATTERN.equals(wordPart)) {
                         if (!isPrevWordEmpty) {
-                            if (!prevKeyWord.equalsIgnoreCase("INTO")) {
+                            if (!"INTO".equalsIgnoreCase(prevKeyWord)) {
                                 String prevWord = wordDetector.getPrevWords().get(0);
                                 if (prevWord.contains(sqlDialect.getCatalogSeparator())) {
                                     int divPos = prevWord.lastIndexOf(sqlDialect.getCatalogSeparator());
@@ -395,7 +395,7 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
                 // SELECT ..
                 // Limit with FROM if we already have some expression
                 String delimiter = wordDetector.getPrevDelimiter();
-                if (delimiter.equals(ALL_COLUMNS_PATTERN) ||
+                if (ALL_COLUMNS_PATTERN.equals(delimiter) ||
                     (!isPrevWordEmpty && (CommonUtils.isEmpty(delimiter) || delimiter.endsWith(")"))))
                 {
                     // last expression ends with space or with ")"
@@ -408,7 +408,7 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
                                 matchedKeywords = Arrays.asList(SQLConstants.KEYWORD_FROM);
                             }
                         }
-                    } else if (delimiter.equals(ALL_COLUMNS_PATTERN)) {
+                    } else if (ALL_COLUMNS_PATTERN.equals(delimiter)) {
                         // Shift offset because we need space after *
                         wordDetector.shiftOffset(1);
                     }
@@ -718,7 +718,7 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
         // Find all aliases matching current word
         SQLScriptElement activeQuery = request.getActiveQuery();
         if (activeQuery != null && !CommonUtils.isEmpty(activeQuery.getText()) && !CommonUtils.isEmpty(wordPart)) {
-            if (wordPart.indexOf(request.getContext().getSyntaxManager().getStructSeparator()) != -1 || wordPart.equals(ALL_COLUMNS_PATTERN)) {
+            if (wordPart.indexOf(request.getContext().getSyntaxManager().getStructSeparator()) != -1 || ALL_COLUMNS_PATTERN.equals(wordPart)) {
                 return;
             }
             final Map<String, String> names = tableRefsAnalyzer.getFilteredTableReferences(wordPart, true);
@@ -959,7 +959,7 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
     {
         if (token == null) {
             token = "";
-        } else if (token.equals(ALL_COLUMNS_PATTERN)) {
+        } else if (ALL_COLUMNS_PATTERN.equals(token)) {
             return null;
         }
 
@@ -991,7 +991,7 @@ public class SQLCompletionAnalyzer implements DBRRunnableParametrized<DBRProgres
     private DBSObject getTableFromAlias(DBSObjectContainer sc, @Nullable String token) {
         if (token == null) {
             token = "";
-        } else if (token.equals(ALL_COLUMNS_PATTERN)) {
+        } else if (ALL_COLUMNS_PATTERN.equals(token)) {
             return null;
         }
 

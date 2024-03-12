@@ -53,7 +53,7 @@ public class ExasolSecurityPolicy implements DBPRefreshableObject, DBPSaveableOb
 	
 	public static HashMap<String,Integer> parseInput(String input)
 	{
-		if (input.equals("OFF"))
+		if ("OFF".equals(input))
 		{
 			return new HashMap<String,Integer>();
 		}
@@ -120,7 +120,7 @@ public class ExasolSecurityPolicy implements DBPRefreshableObject, DBPSaveableOb
 		
 		String value = JDBCUtils.safeGetString(dbResult, "SYSTEM_VALUE");
 		
-		if (value.isEmpty() | value.equals("OFF"))
+		if (value.isEmpty() | "OFF".equals(value))
 		{
 			this.enabled = false;
 		} else {

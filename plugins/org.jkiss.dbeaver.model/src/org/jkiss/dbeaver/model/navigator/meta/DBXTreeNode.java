@@ -82,7 +82,7 @@ public abstract class DBXTreeNode
         if (recursive != null) {
             recursiveLink = this;
             for (String path : recursive.split("/")) {
-                if (path.equals("..")) {
+                if ("..".equals(path)) {
                     recursiveLink = recursiveLink.parent;
                 }
             }

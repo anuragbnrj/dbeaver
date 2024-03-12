@@ -300,7 +300,7 @@ class DBeaverSettingsImporter {
             String relPath = file.getAbsolutePath().substring(oldWorkspacePath.getAbsolutePath().length());
             monitor.subTask(relPath);
             if (file.isDirectory()) {
-                if (parentDirType == DIR_TYPE.METADATA && !(fileName.equals(".plugins") || fileName.equals("qmdb") || fileName.startsWith("dbeaver"))) {
+                if (parentDirType == DIR_TYPE.METADATA && !(".plugins".equals(fileName) || "qmdb".equals(fileName) || fileName.startsWith("dbeaver"))) {
                     // Skip all dirs but plugins
                     skippedFiles += countWorkspaceFiles(file);
                     continue;
@@ -342,7 +342,7 @@ class DBeaverSettingsImporter {
                     continue;
                 }
                 File newFile = new File(toDir, fileName);
-                if (fileName.equals("org.jkiss.dbeaver.core.prefs")) {
+                if ("org.jkiss.dbeaver.core.prefs".equals(fileName)) {
                     // Patch configuration
                     Properties coreProps = new Properties();
                     try (FileInputStream is = new FileInputStream(file)) {
@@ -363,7 +363,7 @@ class DBeaverSettingsImporter {
                     } catch (IOException e) {
                         e.printStackTrace(System.err);
                     }
-                } else if (parentDirType == DIR_TYPE.CORE && fileName.equals("drivers.xml")) {
+                } else if (parentDirType == DIR_TYPE.CORE && "drivers.xml".equals(fileName)) {
                     // Patch drivers cache path
                     String driversText = null;
                     try (Reader r = new InputStreamReader(new FileInputStream(file), GeneralUtils.UTF8_CHARSET)) {

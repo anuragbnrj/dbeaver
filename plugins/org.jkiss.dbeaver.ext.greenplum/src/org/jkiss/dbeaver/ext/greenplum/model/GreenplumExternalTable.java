@@ -325,7 +325,7 @@ public class GreenplumExternalTable extends PostgreTable {
     }
 
     private String determineExecutionLocation() {
-        if (this.getExecLocation() != null && this.getExecLocation().equalsIgnoreCase("MASTER_ONLY")) {
+        if (this.getExecLocation() != null && "MASTER_ONLY".equalsIgnoreCase(this.getExecLocation())) {
             return "ON MASTER";
         }
 

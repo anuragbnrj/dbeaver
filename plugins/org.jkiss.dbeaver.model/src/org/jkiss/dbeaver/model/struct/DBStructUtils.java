@@ -336,7 +336,7 @@ public final class DBStructUtils {
                     typeName = dataType + typeName.substring(startPos);
                 }
             }
-            if (dataType == null && typeNameLower.equals(DOUBLE_DATA_TYPE)) {
+            if (dataType == null && DOUBLE_DATA_TYPE.equals(typeNameLower)) {
                 dataType = dataTypeProvider.getLocalDataType("DOUBLE PRECISION");
                 if (dataType != null) {
                     typeName = dataType.getTypeName();

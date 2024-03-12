@@ -54,9 +54,9 @@ public class SecuredPasswordEncrypter implements PasswordEncrypter {
     {
 
         try {
-            if (encryptionScheme.equals(SCHEME_DESEDE)) {
+            if (SCHEME_DESEDE.equals(encryptionScheme)) {
                 keySpec = new DESedeKeySpec(PASSWORD_ENCRYPTION_KEY);
-            } else if (encryptionScheme.equals(SCHEME_DES)) {
+            } else if (SCHEME_DES.equals(encryptionScheme)) {
                 keySpec = new DESKeySpec(PASSWORD_ENCRYPTION_KEY);
             } else {
                 throw new IllegalArgumentException("Encryption scheme not supported: " + encryptionScheme);

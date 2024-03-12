@@ -839,7 +839,7 @@ public class DatabaseConsumerPageMapping extends DataTransferPageNodeSettings {
                         false,
                         false);
                 }
-            } else if (name.equals(TARGET_NAME_BROWSE)) {
+            } else if (TARGET_NAME_BROWSE.equals(name)) {
                 mapExistingTable((DatabaseMappingContainer) mapping);
             } else {
                 name = transformTargetName(name, mapping.getMappingType());

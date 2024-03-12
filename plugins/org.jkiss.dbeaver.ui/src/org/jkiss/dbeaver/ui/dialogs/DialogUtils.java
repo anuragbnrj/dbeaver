@@ -265,7 +265,7 @@ public class DialogUtils {
             final String[] filters = dialog.getFilterExtensions();
             if (dialog.getFilterIndex() >= 0 && dialog.getFilterIndex() < filters.length) {
                 final String filter = filters[dialog.getFilterIndex()];
-                if (!filter.equals("*") && !filter.equals("*.*") && filter.indexOf('.') >= 0) {
+                if (!"*".equals(filter) && !"*.*".equals(filter) && filter.indexOf('.') >= 0) {
                     return filePath + filter.substring(filter.lastIndexOf('.'));
                 }
             }

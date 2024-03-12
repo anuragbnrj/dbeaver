@@ -110,7 +110,7 @@ public class RestClient {
             } else if (declaringClass == RestProxy.class) {
                 setNextCallResultType((Type) args[0]);
                 return null;
-            } else if (method.getName().equals("close") && (declaringClass == AutoCloseable.class || declaringClass == clientClass)) {
+            } else if ("close".equals(method.getName()) && (declaringClass == AutoCloseable.class || declaringClass == clientClass)) {
                 closeClient();
                 return null;
             }

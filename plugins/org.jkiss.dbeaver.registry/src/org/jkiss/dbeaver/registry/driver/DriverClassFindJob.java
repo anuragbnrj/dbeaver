@@ -137,7 +137,7 @@ public class DriverClassFindJob implements DBRRunnableWithProgress {
                 String[] interfaces = cr.getInterfaces();
                 if (ArrayUtils.contains(interfaces, interfaceName)) {
                     return true;
-                } else if (!CommonUtils.isEmpty(superName) && !superName.equals(OBJECT_CLASS_NAME)) {
+                } else if (!CommonUtils.isEmpty(superName) && !OBJECT_CLASS_NAME.equals(superName)) {
                     // Check recursively
                     JarEntry jarEntry = currentFile.getJarEntry(superName + CLASS_FILE_EXT);
                     if (jarEntry != null) {

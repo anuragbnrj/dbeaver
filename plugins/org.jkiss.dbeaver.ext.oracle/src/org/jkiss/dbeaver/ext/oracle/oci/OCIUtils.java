@@ -19,6 +19,8 @@ package org.jkiss.dbeaver.ext.oracle.oci;
 
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.WinReg;
+import io.github.pixee.security.BoundedLineReader;
+import io.github.pixee.security.SystemCommand;
 import org.jkiss.code.Nullable;
 import org.jkiss.dbeaver.DBException;
 import org.jkiss.dbeaver.Log;
@@ -250,12 +252,12 @@ public class OCIUtils
         String ociBinPath = isInstantClient ? CommonUtils.makeDirectoryName(oraHome) : CommonUtils.makeDirectoryName(oraHome) + "bin/";
         String sqlplus = ociBinPath + "sqlplus -version";
         try {
-            Process p = Runtime.getRuntime().exec(sqlplus);
+            Process p = SystemCommand.runCommand(Runtime.getRuntime(), sqlplus);
             try {
                 BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 try {
                     String line;
-                    while ((line = input.readLine()) != null) {
+                    while ((line = BoundedLineReader.readLine(input, 5_000_000)) != null) {
                         if (line.startsWith("SQL*Plus: Release ")) {
                             return line.substring(18, line.indexOf(" ", 19));
                         }
@@ -322,7 +324,7 @@ public class OCIUtils
                 StringBuilder tnsDescription = new StringBuilder();
                 String curAlias = null;
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                     final String trimmedLine = line.trim();
                     if (trimmedLine.isEmpty() || trimmedLine.startsWith("#") ) {
                         continue;
@@ -333,7 +335,7 @@ public class OCIUtils
                             continue;
                         }
                         final String alias = line.substring(0, divPos);
-                        if (alias.equalsIgnoreCase("IFILE")) {
+                        if ("IFILE".equalsIgnoreCase(alias)) {
                             String filePath = line.substring(divPos + 1).trim();
                             File extFile = new File(filePath);
                             if (!extFile.exists()) {

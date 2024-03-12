@@ -256,7 +256,7 @@ public class VerticaStructureAssistant extends JDBCStructureAssistant<JDBCExecut
                     final String objectName = dbResult.getString(3);
                     final String constraintType = dbResult.getString(4);
                     final String description = searchInComments ? dbResult.getString(5) : "";
-                    final boolean isFK = constraintType.equals("f");
+                    final boolean isFK = "f".equals(constraintType);
                     GenericSchema schema = parentSchema != null ? parentSchema : dataSource.getSchema(schemaName);
                     if (schema == null) {
                         continue; // filtered

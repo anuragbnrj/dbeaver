@@ -300,9 +300,9 @@ public class DBPConnectionType implements DBPDataSourcePermissionOwner {
     private String getColorValueFixed(String color) {
         // Backward compatibility.
         // In old times we had hardcoded colors now we need to change them to color constants
-        if (PROD != null && this.id.equals(PROD.id) && color.equals("247,159,129")) {
+        if (PROD != null && this.id.equals(PROD.id) && "247,159,129".equals(color)) {
             return PROD.color;
-        } else if (TEST != null && this.id.equals(TEST.id) && color.equals("196,255,181")) {
+        } else if (TEST != null && this.id.equals(TEST.id) && "196,255,181".equals(color)) {
             return TEST.color;
         }
         return color;

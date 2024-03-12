@@ -91,7 +91,7 @@ public class DBeaverNotificationPopup extends AbstractWorkbenchNotificationPopup
                 if (notification.getDescription() != null) {
                     descriptionText = notification.getDescription();
                 }
-                if (descriptionText != null && !descriptionText.trim().equals("")) { //$NON-NLS-1$
+                if (descriptionText != null && !"".equals(descriptionText.trim())) { //$NON-NLS-1$
                     Text descriptionLabel = new Text(notificationComposite, SWT.NO_FOCUS | SWT.WRAP | SWT.MULTI);
                     descriptionLabel.setText(LegacyActionTools.escapeMnemonics(descriptionText));
                     descriptionLabel.setBackground(parent.getBackground());

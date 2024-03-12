@@ -153,7 +153,7 @@ public class SQLQueryTranslator implements SQLTranslator {
                         break;
                     case "TEXT":
                         String dialectName = targetDialect.getDialectName().toLowerCase();
-                        if (extendedDialect != null && (dialectName.equals("oracle") || dialectName.equals("sqlserver"))) {
+                        if (extendedDialect != null && ("oracle".equals(dialectName) || "sqlserver".equals(dialectName))) {
                             newDataType = extendedDialect.getClobDataType();
                         }
                         break;

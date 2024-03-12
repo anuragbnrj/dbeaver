@@ -17,6 +17,7 @@
 package org.jkiss.dbeaver.model.net.ssh;
 
 import com.jcraft.jsch.*;
+import io.github.pixee.security.BoundedLineReader;
 import org.eclipse.osgi.util.NLS;
 import org.jkiss.code.NotNull;
 import org.jkiss.dbeaver.DBException;
@@ -273,7 +274,7 @@ public class SSHImplementationJsch extends SSHImplementationAbstract {
         String header;
 
         try (BufferedReader reader = Files.newBufferedReader(key)) {
-            header = reader.readLine();
+            header = BoundedLineReader.readLine(reader, 5_000_000);
         }
 
         /*
@@ -282,7 +283,7 @@ public class SSHImplementationJsch extends SSHImplementationAbstract {
          * to convert it to the older format manually. This
          * algorithm will fail if the 'ssh-keygen' cannot be found (#5845)
          */
-        if (header.equals("-----BEGIN OPENSSH PRIVATE KEY-----")) {
+        if ("-----BEGIN OPENSSH PRIVATE KEY-----".equals(header)) {
             log.debug("Attempting to convert an unsupported key into suitable format");
 
             String id = dataSource != null ? dataSource.getId() : "profile";

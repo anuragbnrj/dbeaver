@@ -144,7 +144,7 @@ public class MySQLPlanAnalyser extends AbstractExecutionPlanSerializer implement
         
         String query = getQuery(jo);
 
-        if (savedVersion.equals("classic")) {
+        if ("classic".equals(savedVersion)) {
             ExecutionPlanDeserializer<MySQLPlanNodePlain> loader = new ExecutionPlanDeserializer<>();
             List<MySQLPlanNodePlain> rootNodes = loader.loadRoot(dataSource, jo,
                 (datasource, node, parent) -> new MySQLPlanNodePlain(parent, getNodeAttributes(node)));

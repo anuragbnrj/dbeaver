@@ -91,7 +91,7 @@ public class HANAMetaModel extends GenericMetaModel
     @Override
     public GenericTableBase createTableImpl(@NotNull JDBCSession session, @NotNull GenericStructContainer owner, @NotNull GenericMetaObject tableObject, @NotNull JDBCResultSet dbResult) {
         String tableType = GenericUtils.safeGetStringTrimmed(tableObject, dbResult, JDBCConstants.TABLE_TYPE);
-        if (tableType != null && tableType.equals("SYNONYM"))
+        if (tableType != null && "SYNONYM".equals(tableType))
             return null;
         return super.createTableImpl(session, owner, tableObject, dbResult);
     }
@@ -373,8 +373,8 @@ public class HANAMetaModel extends GenericMetaModel
         return schemaName.startsWith("_SYS_") ||
             schemaName.startsWith("SAP_") ||
             schemaName.startsWith("HANA_") ||
-            schemaName.equals("SYS") ||
-            schemaName.equals("SYS_DATABASES");
+            "SYS".equals(schemaName) ||
+            "SYS_DATABASES".equals(schemaName);
     }
 
     @Override

@@ -597,7 +597,7 @@ public class DatabaseTransferUtils {
             } catch (NumberFormatException ignored) {
             }
         }
-        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
+        if ("true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value)) {
             return DATA_TYPE_BOOLEAN;
         }
         return DATA_TYPE_STRING;

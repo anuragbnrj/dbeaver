@@ -99,16 +99,16 @@ public class DPIClientProxy implements DPIClientObject, InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (method.getDeclaringClass() == Object.class) {
-            if (method.getName().equals("toString") && objectToString != null) {
+            if ("toString".equals(method.getName()) && objectToString != null) {
                 return objectToString;
-            } else if (method.getName().equals("hashCode") && objectHashCode != null) {
+            } else if ("hashCode".equals(method.getName()) && objectHashCode != null) {
                 return objectHashCode;
             }
             return BeanUtils.handleObjectMethod(proxy, method, args);
         } else if (method.getDeclaringClass() == DPIClientObject.class) {
-            if (method.getName().equals("dpiObjectId")) {
+            if ("dpiObjectId".equals(method.getName())) {
                 return dpiObjectId();
-            } else if (method.getName().equals("dpiObjectType")) {
+            } else if ("dpiObjectType".equals(method.getName())) {
                 return dpiObjectType();
             }
             return null;

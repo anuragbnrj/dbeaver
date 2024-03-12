@@ -265,10 +265,10 @@ public class ExasolStructureAssistant extends JDBCStructureAssistant<ExasolExecu
                     final String constName       = JDBCUtils.safeGetString(dbResult, "CONSTRAINT_NAME");
                     final Class<?> classType;
 
-                    if (constType.equals("PRIMARY KEY"))
+                    if ("PRIMARY KEY".equals(constType))
                     {
                         classType = ExasolTableUniqueKey.class;
-                    } else if (constType.equals("FOREIGN KEY"))
+                    } else if ("FOREIGN KEY".equals(constType))
                     {
                         classType = ExasolTableForeignKey.class;
                     } else {

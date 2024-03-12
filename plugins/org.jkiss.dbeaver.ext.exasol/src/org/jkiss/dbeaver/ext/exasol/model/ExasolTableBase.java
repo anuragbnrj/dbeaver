@@ -84,7 +84,7 @@ public abstract class ExasolTableBase extends JDBCTable<ExasolDataSource, Exasol
     @Override
     public boolean isView() {
 
-        if (objectType.equals("VIEW"))
+        if ("VIEW".equals(objectType))
             return true;
         else
             return false;

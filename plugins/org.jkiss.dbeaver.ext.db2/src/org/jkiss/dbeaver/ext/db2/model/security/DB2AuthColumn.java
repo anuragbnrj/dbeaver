@@ -53,7 +53,7 @@ public class DB2AuthColumn extends DB2AuthBase {
         String privType = JDBCUtils.safeGetString(resultSet, "ALTERINAUTH");
         String grantable = JDBCUtils.safeGetString(resultSet, "CREATEINAUTH");
 
-        if (privType.equals(UPDATE_PRIVILEGE)) {
+        if (UPDATE_PRIVILEGE.equals(privType)) {
             update = grantable.equals(DB2AuthHeldType.N.name()) ? DB2AuthHeldType.Y : DB2AuthHeldType.G;
         } else {
             reference = grantable.equals(DB2AuthHeldType.N.getName()) ? DB2AuthHeldType.Y : DB2AuthHeldType.G;

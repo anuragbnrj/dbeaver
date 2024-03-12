@@ -18,6 +18,8 @@ package org.jkiss.dbeaver.ext.mysql;
 
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.WinReg;
+import io.github.pixee.security.BoundedLineReader;
+import io.github.pixee.security.SystemCommand;
 import org.jkiss.code.NotNull;
 import org.jkiss.code.Nullable;
 import org.jkiss.dbeaver.DBException;
@@ -198,7 +200,7 @@ public class MySQLDataSourceProvider extends JDBCDataSourceProvider implements D
                 File mysqlFile = new File(token, MySQLUtils.getMySQLConsoleBinaryName());
                 if (mysqlFile.exists()) {
                     File binFolder = mysqlFile.getAbsoluteFile().getParentFile();//.getName()
-                    if (binFolder.getName().equalsIgnoreCase("bin")) {
+                    if ("bin".equalsIgnoreCase(binFolder.getName())) {
                     	String homeId = CommonUtils.removeTrailingSlash(binFolder.getParentFile().getAbsolutePath());
                         localServers.put(homeId, new MySQLServerHome(homeId, null));
                     }
@@ -295,12 +297,12 @@ public class MySQLDataSourceProvider extends JDBCDataSourceProvider implements D
             MySQLUtils.getMySQLConsoleBinaryName()).getAbsolutePath();
 
         try {
-            Process p = Runtime.getRuntime().exec(new String[]{cmd, MySQLConstants.FLAG_VERSION});
+            Process p = SystemCommand.runCommand(Runtime.getRuntime(), new String[]{cmd, MySQLConstants.FLAG_VERSION});
             try {
                 BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 try {
                     String line;
-                    while ((line = input.readLine()) != null) {
+                    while ((line = BoundedLineReader.readLine(input, 5_000_000)) != null) {
                         int pos = line.indexOf("Distrib ");
                         if (pos != -1) {
                             pos += 8;

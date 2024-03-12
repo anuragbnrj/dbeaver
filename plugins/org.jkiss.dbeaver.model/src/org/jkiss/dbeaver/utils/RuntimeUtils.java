@@ -16,6 +16,10 @@
  */
 package org.jkiss.dbeaver.utils;
 
+import io.github.pixee.security.BoundedLineReader;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.SystemCommand;
+import io.github.pixee.security.Urls;
 import org.eclipse.core.internal.runtime.Activator;
 import org.eclipse.core.internal.runtime.CommonMessages;
 import org.eclipse.core.runtime.*;
@@ -193,7 +197,7 @@ public final class RuntimeUtils {
     }
 
     public static File getPlatformFile(String platformURL) throws IOException {
-        URL url = new URL(platformURL);
+        URL url = Urls.create(platformURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         URL fileURL = FileLocator.toFileURL(url);
         return getLocalFileFromURL(fileURL);
 
@@ -289,7 +293,7 @@ public final class RuntimeUtils {
         try {
             String[] cmdBin = {binPath};
             String[] cmd = args == null ? cmdBin : ArrayUtils.concatArrays(cmdBin, args);
-            Process p = Runtime.getRuntime().exec(cmd);
+            Process p = SystemCommand.runCommand(Runtime.getRuntime(), cmd);
             try {
                 StringBuilder out = new StringBuilder();
                 readStringToBuffer(p.getInputStream(), out);
@@ -314,7 +318,7 @@ public final class RuntimeUtils {
         try {
             String[] cmdBin = {binPath};
             String[] cmd = args == null ? cmdBin : ArrayUtils.concatArrays(cmdBin, args);
-            Process p = Runtime.getRuntime().exec(cmd);
+            Process p = SystemCommand.runCommand(Runtime.getRuntime(), cmd);
             return getProcessResults(p);
         }
         catch (Exception ex) {
@@ -348,7 +352,7 @@ public final class RuntimeUtils {
     private static void readStringToBuffer(InputStream is, StringBuilder out) throws IOException {
         try (BufferedReader input = new BufferedReader(new InputStreamReader(is))) {
             for (;;) {
-                String line = input.readLine();
+                String line = BoundedLineReader.readLine(input, 5_000_000);
                 if (line == null) {
                     break;
                 }
@@ -374,7 +378,7 @@ public final class RuntimeUtils {
             return false;
         }
         final String property = System.getProperty(DBConstants.IS_WINDOWS_STORE_APP);
-        return property != null && property.equalsIgnoreCase("true");
+        return property != null && "true".equalsIgnoreCase(property);
     }
 
     public static boolean isMacOS() {

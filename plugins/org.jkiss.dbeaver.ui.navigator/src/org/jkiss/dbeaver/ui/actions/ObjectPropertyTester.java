@@ -110,7 +110,7 @@ public class ObjectPropertyTester extends PropertyTester {
                 }
 */
                 if (node instanceof DBNResource) {
-                    return property.equals(PROP_CAN_PASTE);
+                    return PROP_CAN_PASTE.equals(property);
                 }
                 return canCreateObject(node, null);
                 // Do not check PASTE command state. It requires clipboard contents check
@@ -214,7 +214,7 @@ public class ObjectPropertyTester extends PropertyTester {
                         DBEObjectReorderer objectReorderer = getObjectManager(object.getClass(), DBEObjectReorderer.class);
                         if (objectReorderer != null) {
                             final int position = ((DBPOrderedObject) object).getOrdinalPosition();
-                            if (property.equals(PROP_CAN_MOVE_UP)) {
+                            if (PROP_CAN_MOVE_UP.equals(property)) {
                                 return position > objectReorderer.getMinimumOrdinalPosition(object);
                             }
                             return position < objectReorderer.getMaximumOrdinalPosition(object);

@@ -283,7 +283,7 @@ public abstract class ConfigImportWizard extends Wizard implements IImportWizard
                         final String nextComponent = urlComponents.get(i + 1);
                         partEnd = url.indexOf(nextComponent, sourceOffset);
                         if (partEnd == -1) {
-                            if (nextComponent.equals(":")) {
+                            if (":".equals(nextComponent)) {
                                 // Try to find another divider - dbvis sometimes contains bad sample URLs (e.g. for Oracle)
                                 partEnd = url.indexOf("/", sourceOffset);
                             }

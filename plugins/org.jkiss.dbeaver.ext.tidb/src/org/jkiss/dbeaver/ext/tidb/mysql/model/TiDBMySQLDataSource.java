@@ -105,7 +105,7 @@ public class TiDBMySQLDataSource extends MySQLDataSource {
 
     @Override
     public MySQLPrivilege getPrivilege(DBRProgressMonitor monitor, String name) throws DBException {
-        if (name.equalsIgnoreCase("SHOW DB")) {
+        if ("SHOW DB".equalsIgnoreCase(name)) {
             return DBUtils.findObject(getPrivileges(monitor), "Show databases", true);
         }
         return DBUtils.findObject(getPrivileges(monitor), name, true);

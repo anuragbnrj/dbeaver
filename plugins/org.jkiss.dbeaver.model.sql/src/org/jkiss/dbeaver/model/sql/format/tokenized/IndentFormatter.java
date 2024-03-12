@@ -210,7 +210,7 @@ class IndentFormatter {
                     if (isJoinStart(argList, index)) {
                         result += insertReturnAndIndent(argList, index, indent - 1);
                     }
-                    if (tokenString.equals("JOIN")) {
+                    if ("JOIN".equals(tokenString)) {
                         //index += insertReturnAndIndent(argList, index + 1, indent);
                     }
                     break;
@@ -324,7 +324,7 @@ class IndentFormatter {
         }
         if (isCompact) {
             String prevToken = argList.get(index - 1).getString();
-            if (prevToken.equals(",") || Arrays.stream(NO_SPACE_IN_COMPACT_KEYWORDS).anyMatch(t -> t.equalsIgnoreCase(prevToken))) {
+            if (",".equals(prevToken) || Arrays.stream(NO_SPACE_IN_COMPACT_KEYWORDS).anyMatch(t -> t.equalsIgnoreCase(prevToken))) {
                 argList.remove(index);
                 return index - 1;
             }

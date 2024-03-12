@@ -801,7 +801,7 @@ public class JDBCUtils {
         try {
             SQLDialect dialect = SQLUtils.getDialectFromDataSource(session.getDataSource());
             String escapeStr = dialect.getSearchStringEscape();
-            if (CommonUtils.isEmpty(escapeStr) || escapeStr.equals(" ")) {
+            if (CommonUtils.isEmpty(escapeStr) || " ".equals(escapeStr)) {
                 return string;
             }
             return string.replace("%", escapeStr + "%").replace("_", escapeStr + "_");

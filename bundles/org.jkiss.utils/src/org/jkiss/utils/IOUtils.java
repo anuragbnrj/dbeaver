@@ -17,6 +17,7 @@
 
 package org.jkiss.utils;
 
+import io.github.pixee.security.ZipSecurity;
 import org.jkiss.code.NotNull;
 import org.jkiss.code.Nullable;
 
@@ -300,7 +301,7 @@ public final class IOUtils {
     }
 
     public static void extractZipArchive(InputStream stream, Path targetFolder) throws IOException {
-        try (ZipInputStream zipStream = new ZipInputStream(stream)) {
+        try (ZipInputStream zipStream = ZipSecurity.createHardenedInputStream(stream)) {
             for (; ; ) {
                 ZipEntry zipEntry = zipStream.getNextEntry();
                 if (zipEntry == null) {
@@ -434,7 +435,7 @@ public final class IOUtils {
     }
 
     public static boolean isLocalURI(URI uri) {
-        return uri.getScheme().equals("file");
+        return "file".equals(uri.getScheme());
     }
 
     public static boolean isLocalPath(Path filePath) {

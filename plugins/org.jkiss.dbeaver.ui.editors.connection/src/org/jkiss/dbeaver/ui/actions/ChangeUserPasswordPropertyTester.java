@@ -32,7 +32,7 @@ public class ChangeUserPasswordPropertyTester extends PropertyTester {
             return false;
         }
 
-        if (property.equals("canChangePassword")) {
+        if ("canChangePassword".equals(property)) {
             DBNDataSource dsNode = (DBNDataSource) element;
             DBPDataSourceContainer dataSourceContainer = dsNode.getDataSourceContainer();
             DBPDataSource dataSource = dataSourceContainer.getDataSource();

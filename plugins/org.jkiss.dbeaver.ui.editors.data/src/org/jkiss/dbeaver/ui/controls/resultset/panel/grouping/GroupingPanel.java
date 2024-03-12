@@ -290,7 +290,7 @@ public class GroupingPanel implements IResultSetPanel {
             String defSorting = dataSource.getContainer().getPreferenceStore().getString(ResultSetPreferences.RS_GROUPING_DEFAULT_SORTING);
             if (CommonUtils.isEmpty(defSorting)) {
                 return descending == null;
-            } else if (defSorting.equals("ASC")) {
+            } else if ("ASC".equals(defSorting)) {
                 return Boolean.FALSE.equals(descending);
             } else {
                 return Boolean.TRUE.equals(descending);

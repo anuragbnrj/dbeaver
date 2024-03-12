@@ -57,13 +57,13 @@ public class ImageActionDelegate extends Action {
     {
         ImageViewCanvas imageViewCanvas = imageViewControl.getCanvas();
         if (imageViewCanvas.getSourceImage() == null) return;
-        if (id.equals(TOOLBAR_ZOOMIN)) {
+        if (TOOLBAR_ZOOMIN.equals(id)) {
             imageViewCanvas.zoomIn();
-        } else if (id.equals(TOOLBAR_ZOOMOUT)) {
+        } else if (TOOLBAR_ZOOMOUT.equals(id)) {
             imageViewCanvas.zoomOut();
-        } else if (id.equals(TOOLBAR_FIT)) {
+        } else if (TOOLBAR_FIT.equals(id)) {
             imageViewCanvas.fitCanvas();
-        } else if (id.equals(TOOLBAR_ROTATE)) {
+        } else if (TOOLBAR_ROTATE.equals(id)) {
             /* rotate image anti-clockwise */
             ImageData src = imageViewCanvas.getSourceImage().getImageData();
             if (src == null) return;
@@ -85,7 +85,7 @@ public class ImageActionDelegate extends Action {
                 }
             }
             imageViewCanvas.updateImage(dest);
-        } else if (id.equals(TOOLBAR_ORIGINAL)) {
+        } else if (TOOLBAR_ORIGINAL.equals(id)) {
             imageViewCanvas.showOriginal();
         }
     }

@@ -61,7 +61,7 @@ public abstract class DataTypeAbstractDescriptor<DESCRIPTOR> extends AbstractDes
         for (IConfigurationElement typeElement : typeElements) {
             String typeName = typeElement.getAttribute(RegistryConstants.ATTR_NAME);
             if (typeName != null) {
-                if (typeName.equals(ALL_TYPES_PATTERN)) {
+                if (ALL_TYPES_PATTERN.equals(typeName)) {
                     hasAll = true;
                 } else {
                     supportedTypes.add(typeName.toLowerCase(Locale.ENGLISH));

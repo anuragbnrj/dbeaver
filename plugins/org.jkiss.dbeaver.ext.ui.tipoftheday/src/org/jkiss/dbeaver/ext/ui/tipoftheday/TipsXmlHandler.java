@@ -62,14 +62,14 @@ public class TipsXmlHandler extends DefaultHandler {
             }
             tipTagContent.append(TAG_BRACKET_END);
         }
-        if (qName.equalsIgnoreCase(TIP)) {
+        if (TIP.equalsIgnoreCase(qName)) {
             this.tipTagStarted = true;
             this.tipApplicable = true;
             String tipProducts = attributes.getValue("product");
             if (!CommonUtils.isEmpty(tipProducts) && !CommonUtils.isEmpty(productEdition)) {
                 this.tipApplicable = ArrayUtils.contains(tipProducts.split(","), productEdition);
             }
-        } else if (qName.equalsIgnoreCase(COMMAND_REF)) {
+        } else if (COMMAND_REF.equalsIgnoreCase(qName)) {
             String commandId = attributes.getValue(COMMAND_ID);
             String description = ActionUtils.findCommandDescription(commandId, PlatformUI.getWorkbench(), false);
             if (!CommonUtils.isEmpty(description)) {
@@ -89,7 +89,7 @@ public class TipsXmlHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if (qName.equalsIgnoreCase(TIP)) {
+        if (TIP.equalsIgnoreCase(qName)) {
             if (tipApplicable) {
                 this.tips.add(tipTagContent.toString());
             }

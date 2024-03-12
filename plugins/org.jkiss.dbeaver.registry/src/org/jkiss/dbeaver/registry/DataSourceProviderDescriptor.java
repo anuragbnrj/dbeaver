@@ -174,7 +174,7 @@ public class DataSourceProviderDescriptor extends AbstractDescriptor implements 
                             providerProperties.addAll(ProviderPropertyDescriptor.extractProviderProperties(prop));
                         }
                         List<DriverDescriptor> appDrivers;
-                        if (CommonUtils.isEmpty(driversSpec) || driversSpec.equals("*")) {
+                        if (CommonUtils.isEmpty(driversSpec) || "*".equals(driversSpec)) {
                             appDrivers = drivers;
                         } else {
                             String[] driverIds = driversSpec.split(",");

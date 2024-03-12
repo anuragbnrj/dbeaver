@@ -86,7 +86,7 @@ public class AuthModelPgPass extends AuthModelDatabaseNative<AuthModelPgPassCred
         DBPConnectionConfiguration originalConfiguration = dataSource.getConnectionConfiguration();
         String conHostName = originalConfiguration.getHostName();
         String sshHost = null;
-        if (CommonUtils.isEmpty(conHostName) || conHostName.equals("localhost") || conHostName.equals("127.0.0.1")) {
+        if (CommonUtils.isEmpty(conHostName) || "localhost".equals(conHostName) || "127.0.0.1".equals(conHostName)) {
             sshHost = getSSHHost(dataSource);
         }
         final String providerProperty = dataSource.getConnectionConfiguration()
@@ -169,7 +169,7 @@ public class AuthModelPgPass extends AuthModelDatabaseNative<AuthModelPgPassCred
                     credentials.setUserPassword(password);
                     return true;
                 } else if (matchParam(conUserName, user)) {
-                    if (!user.equals("*")) {
+                    if (!"*".equals(user)) {
                         configuration.setUserName(user);
                     }
                     credentials.setUserPassword(password);
@@ -195,6 +195,6 @@ public class AuthModelPgPass extends AuthModelDatabaseNative<AuthModelPgPassCred
     }
 
     private static boolean matchParam(String cfgParam, String passParam) {
-        return passParam.equals("*") || passParam.equalsIgnoreCase(cfgParam);
+        return "*".equals(passParam) || passParam.equalsIgnoreCase(cfgParam);
     }
 }

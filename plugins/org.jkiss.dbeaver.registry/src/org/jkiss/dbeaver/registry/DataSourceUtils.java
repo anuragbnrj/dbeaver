@@ -395,7 +395,7 @@ public class DataSourceUtils {
     public static String getTargetTunnelHostName(DBPConnectionConfiguration cfg) {
         String hostText = cfg.getHostName();
         // For localhost ry to get real host name from tunnel configuration
-        if (CommonUtils.isEmpty(hostText) || hostText.equals("localhost") || hostText.equals("127.0.0.1")) {
+        if (CommonUtils.isEmpty(hostText) || "localhost".equals(hostText) || "127.0.0.1".equals(hostText)) {
             for (DBWHandlerConfiguration hc : cfg.getHandlers()) {
                 if (hc.isEnabled() && hc.getType() == DBWHandlerType.TUNNEL) {
                     String tunnelHost = hc.getStringProperty(DBWHandlerConfiguration.PROP_HOST);

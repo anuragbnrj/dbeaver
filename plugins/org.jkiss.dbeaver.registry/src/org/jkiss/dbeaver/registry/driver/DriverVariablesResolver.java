@@ -23,7 +23,7 @@ class DriverVariablesResolver extends SystemVariablesResolver {
 
     @Override
     public String get(String name) {
-        if (name.equalsIgnoreCase(VAR_DRIVERS_HOME)) {
+        if (VAR_DRIVERS_HOME.equalsIgnoreCase(name)) {
             return DriverDescriptor.getCustomDriversHome().toAbsolutePath().toString();
         } else {
             return super.get(name);

@@ -36,7 +36,7 @@ public class DatabaseEditorPropertyTester extends PropertyTester
             return false;
         }
         IDatabaseEditor databaseEditor = (IDatabaseEditor) receiver;
-        if (property.equals(PROP_ACTIVE)) {
+        if (PROP_ACTIVE.equals(property)) {
             String typeName = String.valueOf(expectedValue);
             if (databaseEditor instanceof MultiPageAbstractEditor) {
                 MultiPageAbstractEditor mpEditor = (MultiPageAbstractEditor)databaseEditor;

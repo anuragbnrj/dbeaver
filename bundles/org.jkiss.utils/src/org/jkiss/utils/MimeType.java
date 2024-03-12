@@ -80,7 +80,7 @@ public class MimeType {
 
     public boolean match(MimeType type) {
         return primaryType.equals(type.getPrimaryType()) &&
-            (subType.equals("*") || type.getSubType().equals("*") || (subType.equals(type.getSubType())));
+            ("*".equals(subType) || "*".equals(type.getSubType()) || (subType.equals(type.getSubType())));
     }
 
     public boolean match(String rawdata) throws IllegalArgumentException {

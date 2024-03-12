@@ -158,7 +158,7 @@ public class SQLGroupingQueryGenerator {
             if (i > 0) sql.append(", ");
             sql.append(quotedGroupingString(dataSource, groupAttributes.get(i)));
         }
-        boolean isDefaultGrouping = groupFunctions.size() == 1 && groupFunctions.get(0).equalsIgnoreCase(DEFAULT_FUNCTION);
+        boolean isDefaultGrouping = groupFunctions.size() == 1 && DEFAULT_FUNCTION.equalsIgnoreCase(groupFunctions.get(0));
 
         if (isDefaultGrouping && showDuplicatesOnly) {
             sql.append("\nHAVING ");

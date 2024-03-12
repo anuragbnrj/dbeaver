@@ -257,7 +257,7 @@ public class ResultSetHandlerMain extends AbstractHandler implements IElementUpd
                 break;
             case CMD_ROW_ADD:
             case CMD_ROW_COPY: {
-                boolean copy = actionId.equals(CMD_ROW_COPY);
+                boolean copy = CMD_ROW_COPY.equals(actionId);
                 boolean shiftPressed = event.getTrigger() instanceof Event && ((((Event) event.getTrigger()).stateMask & SWT.SHIFT) == SWT.SHIFT);
                 boolean insertAfter = rsv.getPreferenceStore().getBoolean(ResultSetPreferences.RS_EDIT_NEW_ROWS_AFTER);
                 if (shiftPressed) insertAfter = !insertAfter;
@@ -267,7 +267,7 @@ public class ResultSetHandlerMain extends AbstractHandler implements IElementUpd
             }
             case CMD_ROW_COPY_FROM_ABOVE:
             case CMD_ROW_COPY_FROM_BELOW: {
-                rsv.copyRowValues(actionId.equals(CMD_ROW_COPY_FROM_ABOVE), true);
+                rsv.copyRowValues(CMD_ROW_COPY_FROM_ABOVE.equals(actionId), true);
                 break;
             }
             case CMD_ROW_DELETE:
@@ -290,10 +290,10 @@ public class ResultSetHandlerMain extends AbstractHandler implements IElementUpd
                             new ResultSetCellLocation(attr, row, selection.getElementRowIndexes(cell)),
                             IValueController.EditType.NONE,
                             null);
-                        if (actionId.equals(CMD_CELL_SET_NULL)) {
+                        if (CMD_CELL_SET_NULL.equals(actionId)) {
                             valueController.updateValue(
                                 BaseValueManager.makeNullValue(valueController), false);
-                        } else if (actionId.equals(CMD_CELL_SET_DEFAULT)) {
+                        } else if (CMD_CELL_SET_DEFAULT.equals(actionId)) {
                             DBDValueHandler valueHandler = valueController.getValueHandler();
                             if (valueHandler instanceof DBDValueDefaultGenerator) {
                                 try (DBCSession session = rsv.getExecutionContext().openSession(new VoidProgressMonitor(), DBCExecutionPurpose.UTIL, "Generate default value")) {
@@ -321,7 +321,7 @@ public class ResultSetHandlerMain extends AbstractHandler implements IElementUpd
 
                 rsv.applyChanges(null, saveSettings);
 
-                if (actionId.equals(CMD_APPLY_AND_COMMIT_CHANGES)) {
+                if (CMD_APPLY_AND_COMMIT_CHANGES.equals(actionId)) {
                     // Do commit
                     ActionUtils.runCommand(ConnectionCommands.CMD_COMMIT, rsv.getSite());
                 }
@@ -584,7 +584,7 @@ public class ResultSetHandlerMain extends AbstractHandler implements IElementUpd
                 if (font != null) {
                     FontData[] fondData= font.getFontData();
                     if (fondData != null) {
-                        int zoomFactor = actionId.equals(CMD_ZOOM_IN) ? 1 : -1;
+                        int zoomFactor = CMD_ZOOM_IN.equals(actionId) ? 1 : -1;
                         FontDescriptor fd = createFontDescriptor(fondData, zoomFactor);
                         fontRegistry.put(presentation.getFontId(), fd.getFontData());
                     }

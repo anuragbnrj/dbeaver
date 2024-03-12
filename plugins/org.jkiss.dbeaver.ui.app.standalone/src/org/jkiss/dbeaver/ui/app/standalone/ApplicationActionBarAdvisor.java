@@ -138,7 +138,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
                 pavField.setAccessible(true);
                 String[] pav = (String[]) pavField.get(cfgElement);
                 for (int i = 0; i < pav.length; i += 2) {
-                    if (pav[i].equals("icon")) {
+                    if ("icon".equals(pav[i])) {
                         pav[i + 1] = iconPath;
                     }
                 }

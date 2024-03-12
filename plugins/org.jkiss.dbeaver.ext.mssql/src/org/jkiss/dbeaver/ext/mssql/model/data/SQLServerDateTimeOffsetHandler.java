@@ -57,7 +57,7 @@ public class SQLServerDateTimeOffsetHandler extends JDBCDateTimeValueHandler {
     ) throws DBCException {
         if (
             object != null
-            && object.getClass().getName().equals("microsoft.sql.DateTimeOffset")
+            && "microsoft.sql.DateTimeOffset".equals(object.getClass().getName())
             && !formatSettings.isUseNativeDateTimeFormat()
         ) {
             try {

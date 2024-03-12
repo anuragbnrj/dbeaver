@@ -39,7 +39,7 @@ public class ProcessPropertyTester extends PropertyTester
             return false;
         }
         DBRProcessController controller = (DBRProcessController)receiver;
-        if (property.equals(PROP_RUNNING)) {
+        if (PROP_RUNNING.equals(property)) {
             return controller.getProcessDescriptor() != null && controller.getProcessDescriptor().isRunning();
         }
 
