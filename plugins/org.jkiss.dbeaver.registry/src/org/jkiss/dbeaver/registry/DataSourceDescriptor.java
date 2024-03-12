@@ -16,6 +16,7 @@
  */
 package org.jkiss.dbeaver.registry;
 
+import java.security.SecureRandom;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -1674,7 +1675,7 @@ public class DataSourceDescriptor
     }
 
     public static String generateNewId(DBPDriver driver) {
-        long rnd = new Random().nextLong();
+        long rnd = new SecureRandom().nextLong();
         if (rnd < 0) rnd = -rnd;
         return driver.getId() + "-" + Long.toHexString(System.currentTimeMillis()) + "-" + Long.toHexString(rnd);
     }
